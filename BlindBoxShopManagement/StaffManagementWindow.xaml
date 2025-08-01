@@ -39,6 +39,7 @@
                 <Button Content="Add" Name="addBtn" Width="80" Margin="5,0" Click="btnAdd_Click"/>
                 <Button Content="Edit" Name="editBtn" Width="80" Margin="5,0" Click="btnEdit_Click"/>
                 <Button Content="Delete" Name="deleteBtn" Width="80" Margin="5,0" Click="btnDelete_Click"/>
+                <Button Content="Export Staff" Name="exportBtn" Width="80" Margin="5,0" Click="btnExportStaff_Click"/>
             </StackPanel>
         </DockPanel>
 

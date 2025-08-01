@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="8.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BAL\BAL.csproj" />
   </ItemGroup>
 
