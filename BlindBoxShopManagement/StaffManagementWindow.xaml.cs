@@ -23,5 +23,38 @@ namespace BlindBoxShopManagement
         {
             InitializeComponent();
         }
+
+        private void txtSearch_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtSearch.Text == "Search by Full Name")
+            {
+                txtSearch.Text = "";
+                txtSearch.Foreground = Brushes.Black;
+            }
+        }
+
+        private void txtSearch_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                txtSearch.Text = "Search by Full Name";
+                txtSearch.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            String searchText = txtSearch.Text.Trim();
+            if (searchText.Equals("Search by Full Name") || string.IsNullOrWhiteSpace(searchText))
+            {
+                //Show all staff
+                MessageBox.Show("Please enter a valid name to search.");
+                return;
+            }
+            else
+            {
+                // Perform search logic here
+            }
+        }
     }
 }
