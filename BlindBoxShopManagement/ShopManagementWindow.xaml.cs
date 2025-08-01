@@ -70,7 +70,9 @@ namespace BlindBoxShopManagement
 
         private void ProductManagementClick(object sender, RoutedEventArgs e)
         {
-
+            ProductWindow productWindow = new ProductWindow(role);
+            productWindow.Show();
+            this.Close(); // Close the current window
         }
 
         private void SearchClick(object sender, RoutedEventArgs e)
