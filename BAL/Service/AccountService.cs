@@ -1,4 +1,5 @@
-﻿using DAL.Repository;
+﻿using DAL.Entities;
+using DAL.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,9 +33,38 @@ namespace BAL.Service
             }
         }
 
+        public List<AccountDetail> getAllStaffDetails()
+        {
+            return accountRepository.getAllStaffDetails();
+        }
+
         public string GetRoleByEmail(string email)
         {
             return accountRepository.GetRoleByEmail(email);
+        }
+
+        public void AddStaffAccount(Account account, AccountDetail detail)
+        {
+            if (account == null || detail == null)
+            {
+                throw new ArgumentNullException("Account or AccountDetail cannot be null");
+            }
+            accountRepository.AddStaffAccount(account, detail);
+        }
+
+        public void UpdateStaffAccount(Account account, AccountDetail detail)
+        {
+            if (account == null || detail == null)
+            {
+                throw new ArgumentNullException("Account or AccountDetail cannot be null");
+            }
+            // Assuming the repository has an Update method
+            accountRepository.UpdateStaffAccount(account, detail);
+        }
+
+        public void deleteStaffAccount(Account account)
+        {
+            accountRepository.DeleteStaffAccount(account);
         }
     }
 }
