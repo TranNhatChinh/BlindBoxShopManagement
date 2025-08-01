@@ -65,7 +65,8 @@ namespace BlindBoxShopManagement
 
         private void Button_Order(object sender, RoutedEventArgs e)
         {
-
+            OrderingWindow orderingWindow = new OrderingWindow();
+            orderingWindow.Show();
         }
 
         private void ProductManagementClick(object sender, RoutedEventArgs e)

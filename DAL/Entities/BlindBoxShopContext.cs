@@ -20,8 +20,11 @@ public partial class BlindBoxShopContext : DbContext
 
     public virtual DbSet<AccountDetail> AccountDetails { get; set; }
 
-    public virtual DbSet<Product> Products { get; set; }
+    public virtual DbSet<Order> Orders { get; set; }
 
+    public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+
+    public virtual DbSet<Product> Products { get; set; }
 
     private string GetConnectionString()
     {
@@ -38,6 +41,7 @@ public partial class BlindBoxShopContext : DbContext
     {
         optionsBuilder.UseSqlServer(GetConnectionString());
     }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
@@ -75,6 +79,38 @@ public partial class BlindBoxShopContext : DbContext
             entity.HasOne(d => d.Account).WithOne(p => p.AccountDetail)
                 .HasForeignKey<AccountDetail>(d => d.AccountId)
                 .HasConstraintName("FK__AccountDe__Accou__44FF419A");
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Order__3214EC07E0D60D0C");
+
+            entity.ToTable("Order");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.CustomerName).HasMaxLength(100);
+            entity.Property(e => e.PhoneNumber).HasMaxLength(20);
+            entity.Property(e => e.TotalPrice).HasColumnType("decimal(18, 2)");
+        });
+
+        modelBuilder.Entity<OrderDetail>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__OrderDet__3214EC0761AD45EA");
+
+            entity.ToTable("OrderDetail");
+
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.ProductName).HasMaxLength(100);
+            entity.Property(e => e.Total)
+                .HasComputedColumnSql("([Quantity]*[Price])", true)
+                .HasColumnType("decimal(29, 2)");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.OrderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__OrderDeta__Order__5070F446");
         });
 
         modelBuilder.Entity<Product>(entity =>

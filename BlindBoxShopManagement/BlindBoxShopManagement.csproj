@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BAL\BAL.csproj" />
+    <ProjectReference Include="..\ViewModels\ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
