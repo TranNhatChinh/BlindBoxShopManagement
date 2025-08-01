@@ -44,6 +44,24 @@ namespace BlindBoxShopManagement
         {
             try
             {
+                if (!ValidateInputs(out string errorMessage))
+                {
+                    MessageBox.Show(errorMessage);
+                    return;
+                }
+
+                // Extracting values
+                string username = txtUsername.Text.Trim();
+                string password = txtPassword.Password;
+                string email = txtEmail.Text.Trim();
+                string fullName = txtFullName.Text.Trim();
+                string phone = txtPhone.Text.Trim();
+                string address = txtAddress.Text.Trim();
+                string gender = ((ComboBoxItem)cbGender.SelectedItem).Content.ToString();
+                DateTime dob = dpDOB.SelectedDate.Value;
+                string identity = txtIdentity.Text.Trim();
+                string avatar = txtAvatar.Text.Trim();
+
                 if (_editingAccount != null && _editingDetail != null)
                 {
                     // Edit mode
@@ -63,66 +81,6 @@ namespace BlindBoxShopManagement
                 }
                 else
                 {
-                    // Add new staff with validations
-                    if (string.IsNullOrWhiteSpace(txtUsername.Text))
-                    {
-                        MessageBox.Show("Username is required.");
-                        return;
-                    }
-
-                    if (string.IsNullOrWhiteSpace(txtPassword.Password))
-                    {
-                        MessageBox.Show("Password is required.");
-                        return;
-                    }
-
-                    if (string.IsNullOrWhiteSpace(txtEmail.Text))
-                    {
-                        MessageBox.Show("Email is required.");
-                        return;
-                    }
-
-                    if (string.IsNullOrWhiteSpace(txtFullName.Text))
-                    {
-                        MessageBox.Show("Full name is required.");
-                        return;
-                    }
-
-                    if (string.IsNullOrWhiteSpace(txtPhone.Text))
-                    {
-                        MessageBox.Show("Phone is required.");
-                        return;
-                    }
-
-                    if (string.IsNullOrWhiteSpace(txtIdentity.Text))
-                    {
-                        MessageBox.Show("Identity number is required.");
-                        return;
-                    }
-
-                    if (cbGender.SelectedItem == null)
-                    {
-                        MessageBox.Show("Gender must be selected.");
-                        return;
-                    }
-
-                    if (!dpDOB.SelectedDate.HasValue)
-                    {
-                        MessageBox.Show("Date of Birth is required.");
-                        return;
-                    }
-
-                    // Check age >= 18
-                    DateTime dob = dpDOB.SelectedDate.Value;
-                    int age = DateTime.Today.Year - dob.Year;
-                    if (dob.Date > DateTime.Today.AddYears(-age)) age--;
-
-                    if (age < 18)
-                    {
-                        MessageBox.Show("Staff must be at least 18 years old.");
-                        return;
-                    }
-
                     // Create and save
                     var account = new Account
                     {
@@ -162,5 +120,58 @@ namespace BlindBoxShopManagement
         {
             this.Close();
         }
+
+        private bool ValidateInputs(out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(txtUsername.Text))
+            {
+                errorMessage = "Username is required.";
+            }
+            else if (string.IsNullOrWhiteSpace(txtPassword.Password))
+            {
+                errorMessage = "Password is required.";
+            }
+            else if (string.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                errorMessage = "Email is required.";
+            }
+            else if (string.IsNullOrWhiteSpace(txtFullName.Text))
+            {
+                errorMessage = "Full name is required.";
+            }
+            else if (string.IsNullOrWhiteSpace(txtPhone.Text))
+            {
+                errorMessage = "Phone is required.";
+            }
+            else if (string.IsNullOrWhiteSpace(txtIdentity.Text))
+            {
+                errorMessage = "Identity number is required.";
+            }
+            else if (cbGender.SelectedItem == null)
+            {
+                errorMessage = "Gender must be selected.";
+            }
+            else if (!dpDOB.SelectedDate.HasValue)
+            {
+                errorMessage = "Date of Birth is required.";
+            }
+            else
+            {
+                // Check age >= 18
+                DateTime dob = dpDOB.SelectedDate.Value;
+                int age = DateTime.Today.Year - dob.Year;
+                if (dob.Date > DateTime.Today.AddYears(-age)) age--;
+
+                if (age < 18)
+                {
+                    errorMessage = "Staff must be at least 18 years old.";
+                }
+            }
+
+            return string.IsNullOrEmpty(errorMessage);
+        }
+
     }
 }
