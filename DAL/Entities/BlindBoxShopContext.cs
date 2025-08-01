@@ -18,12 +18,14 @@ public partial class BlindBoxShopContext : DbContext
 
     public virtual DbSet<Account> Accounts { get; set; }
 
+    public virtual DbSet<AccountDetail> AccountDetails { get; set; }
+
     public virtual DbSet<Product> Products { get; set; }
 
     private string GetConnectionString()
     {
         IConfiguration config = new ConfigurationBuilder()
-             .SetBasePath(Directory.GetCurrentDirectory())
+             .SetBasePath(AppContext.BaseDirectory)
                     .AddJsonFile("appsettings.json", true, true)
                     .Build();
         var strConn = config["ConnectionStrings:DefaultConnection"];
@@ -31,33 +33,54 @@ public partial class BlindBoxShopContext : DbContext
         return strConn;
     }
 
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(GetConnectionString());
     }
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Account__3214EC07CFA6C899");
+            entity.HasKey(e => e.Id).HasName("PK__Account__3214EC0717501415");
 
             entity.ToTable("Account");
 
-            entity.HasIndex(e => e.Username, "UQ__Account__536C85E4C5B9BC2C").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Account__536C85E48E0C3258").IsUnique();
+
+            entity.HasIndex(e => e.Email, "UQ__Account__A9D10534368442C1").IsUnique();
 
             entity.Property(e => e.Email).HasMaxLength(100);
-            entity.Property(e => e.Password).HasMaxLength(100);
+            entity.Property(e => e.Password).HasMaxLength(256);
             entity.Property(e => e.Role)
                 .HasMaxLength(20)
                 .HasDefaultValue("User");
             entity.Property(e => e.Username).HasMaxLength(50);
         });
 
+        modelBuilder.Entity<AccountDetail>(entity =>
+        {
+            entity.HasKey(e => e.AccountId).HasName("PK__AccountD__349DA5A62DC715D7");
+
+            entity.ToTable("AccountDetail");
+
+            entity.Property(e => e.AccountId).ValueGeneratedNever();
+            entity.Property(e => e.Address).HasMaxLength(255);
+            entity.Property(e => e.Avatar).HasMaxLength(255);
+            entity.Property(e => e.FullName).HasMaxLength(100);
+            entity.Property(e => e.Gender).HasMaxLength(10);
+            entity.Property(e => e.IdentityNumber).HasMaxLength(12);
+            entity.Property(e => e.Phone).HasMaxLength(15);
+
+            entity.HasOne(d => d.Account).WithOne(p => p.AccountDetail)
+                .HasForeignKey<AccountDetail>(d => d.AccountId)
+                .HasConstraintName("FK__AccountDe__Accou__44FF419A");
+        });
+
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Product__3214EC07EE9DE838");
+            entity.HasKey(e => e.Id).HasName("PK__Product__3214EC0785F19729");
 
             entity.ToTable("Product");
 

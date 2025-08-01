@@ -43,7 +43,7 @@ namespace BlindBoxShopManagement
             {
                 MessageBox.Show("Login successful!");
                 String role = accountService.GetRoleByEmail(email);
-                ShopManagementWindow window = new ShopManagementWindow(role);
+                ShopManagementWindow window = new ShopManagementWindow(email);
                 window.Show();
                 this.Close(); // Close the login window
             }
