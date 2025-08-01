@@ -41,10 +41,26 @@ namespace DAL.Repository
             _context.SaveChanges();
         }
 
+        public void UpdateStaffAccount(Account account, AccountDetail detail)
+        {
+            _context.Accounts.Update(account);
+            _context.AccountDetails.Update(detail);
+            _context.SaveChanges();
+        }
+
         public string GetRoleByEmail(string email)
         {
             var account = _context.Accounts.FirstOrDefault(a => a.Email == email);
             return account?.Role ?? "User"; // Default to "User" if not found
+        }
+
+        public void DeleteStaffAccount(Account account)
+        {
+            if (account != null)
+            {
+                _context.Accounts.Remove(account);
+                _context.SaveChanges();
+            }
         }
     }
 }

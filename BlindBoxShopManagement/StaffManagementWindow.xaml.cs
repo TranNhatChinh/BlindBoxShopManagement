@@ -90,5 +90,60 @@ namespace BlindBoxShopManagement
                 dgvDisplay.ItemsSource = filtered;
             }
         }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var selected = dgvDisplay.SelectedItem as AccountDetail;
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a staff to edit.");
+                return;
+            }
+
+            var account = selected.Account;
+            if (account == null)
+            {
+                MessageBox.Show("Account data is missing.");
+                return;
+            }
+
+            var editWindow = new AddStaffWindow(account, selected);
+            var result = editWindow.ShowDialog();
+            if (result == true)
+            {
+                // Refresh after edit
+                dgvDisplay.ItemsSource = _accountService.getAllStaffDetails();
+            }
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var selected = dgvDisplay.SelectedItem as AccountDetail;
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a staff to delete.");
+                return;
+            }
+
+            var account = selected.Account;
+            if (account == null)
+            {
+                MessageBox.Show("Account data is missing.");
+                return;
+            }
+
+            if (MessageBox.Show($"Are you sure you want to delete {selected.FullName}?", "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _accountService.deleteStaffAccount(account);
+                    LoadStaffData();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error deleting staff: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }

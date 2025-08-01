@@ -51,5 +51,20 @@ namespace BAL.Service
             }
             accountRepository.AddStaffAccount(account, detail);
         }
+
+        public void UpdateStaffAccount(Account account, AccountDetail detail)
+        {
+            if (account == null || detail == null)
+            {
+                throw new ArgumentNullException("Account or AccountDetail cannot be null");
+            }
+            // Assuming the repository has an Update method
+            accountRepository.UpdateStaffAccount(account, detail);
+        }
+
+        public void deleteStaffAccount(Account account)
+        {
+            accountRepository.DeleteStaffAccount(account);
+        }
     }
 }
