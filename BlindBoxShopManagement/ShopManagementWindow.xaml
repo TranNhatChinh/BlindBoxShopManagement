@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlindBoxShopManagement"
         mc:Ignorable="d"
-        Title="ShopManagementWindow" Height="450" Width="800">
+        Title="ShopManagementWindow" Height="600" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
-        
+        <Label HorizontalContentAlignment="Center" Content="Blind Box Shop Management" HorizontalAlignment="Left" Height="72" Margin="167,37,0,0" VerticalAlignment="Top" Width="492" FontSize="30" FontWeight="Bold"/>
+        <Button Content="Staff Management" Name="staffManagementButton" HorizontalAlignment="Left" Height="25" Margin="565,109,0,0" VerticalAlignment="Top" Width="141" Click="StaffManageClick"/>
+        <DataGrid HorizontalAlignment="Left" Height="356" Margin="79,159,0,0" VerticalAlignment="Top" Width="676" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <Button Content="Log out" HorizontalAlignment="Left" Height="20" Margin="700,537,0,0" VerticalAlignment="Top" Width="82" Click="LogOutClick"/>
+        <Button Content="Product Management" Name="ProductManagementButton" HorizontalAlignment="Left" Height="25" Margin="343,109,0,0" VerticalAlignment="Top" Click="ProductManagementClick" Width="148"/>
+        <Button Content="Create order" HorizontalAlignment="Left" Height="25" Margin="119,109,0,0" VerticalAlignment="Top" Width="138" Click="Button_Order"/>
+
     </Grid>
 </Window>
