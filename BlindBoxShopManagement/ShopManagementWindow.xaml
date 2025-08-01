@@ -8,11 +8,28 @@
         Title="ShopManagementWindow" Height="600" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Label HorizontalContentAlignment="Center" Content="Blind Box Shop Management" HorizontalAlignment="Left" Height="72" Margin="167,37,0,0" VerticalAlignment="Top" Width="492" FontSize="30" FontWeight="Bold"/>
-        <Button Content="Staff Management" Name="staffManagementButton" HorizontalAlignment="Left" Height="25" Margin="565,109,0,0" VerticalAlignment="Top" Width="141" Click="StaffManageClick"/>
-        <DataGrid HorizontalAlignment="Left" Height="356" Margin="79,159,0,0" VerticalAlignment="Top" Width="676" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <Button Content="Staff Management" Name="staffManagementButton" HorizontalAlignment="Left" Height="25" Margin="614,109,0,0" VerticalAlignment="Top" Width="141" Click="StaffManageClick"/>
         <Button Content="Log out" HorizontalAlignment="Left" Height="20" Margin="700,537,0,0" VerticalAlignment="Top" Width="82" Click="LogOutClick"/>
-        <Button Content="Product Management" Name="ProductManagementButton" HorizontalAlignment="Left" Height="25" Margin="343,109,0,0" VerticalAlignment="Top" Click="ProductManagementClick" Width="148"/>
-        <Button Content="Create order" HorizontalAlignment="Left" Height="25" Margin="119,109,0,0" VerticalAlignment="Top" Width="138" Click="Button_Order"/>
+        <Button Content="Product Management" Name="ProductManagementButton" HorizontalAlignment="Left" Height="25" Margin="339,109,0,0" VerticalAlignment="Top" Click="ProductManagementClick" Width="148"/>
+        <Button Content="Create order" HorizontalAlignment="Left" Height="25" Margin="79,109,0,0" VerticalAlignment="Top" Width="138" Click="Button_Order" RenderTransformOrigin="0.333,0.562"/>
+
+
+        <DataGrid Name="dgvDisplay"
+          Grid.Column="0"
+          Grid.Row="0"
+          AutoGenerateColumns="False"
+          Margin="55,214,45,68">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"/>
+                <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Product Name:" HorizontalAlignment="Left" Height="25" Margin="79,184,0,0" VerticalAlignment="Top" Width="88"/>
+        <TextBox x:Name="txtSearchByProductName" HorizontalAlignment="Center" Height="25" Margin="0,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="466"/>
+        <Button Click="SearchClick" Content="Search" HorizontalAlignment="Left" Height="25" Margin="638,184,0,0" VerticalAlignment="Top" Width="94"/>
 
     </Grid>
 </Window>
