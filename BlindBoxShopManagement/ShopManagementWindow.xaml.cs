@@ -43,9 +43,8 @@ namespace BlindBoxShopManagement
 
         private void StaffManageClick(object sender, RoutedEventArgs e)
         {
-            StaffManagementWindow staffManagementWindow = new StaffManagementWindow();
+            StaffManagementWindow staffManagementWindow = new StaffManagementWindow(role);
             staffManagementWindow.Show();
-
         }
 
         private void LogOutClick(object sender, RoutedEventArgs e)

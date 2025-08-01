@@ -23,16 +23,25 @@ namespace BlindBoxShopManagement
     {
 
         private AccountService _accountService;
-        public StaffManagementWindow()
+        private readonly string role;
+
+        public StaffManagementWindow(string role)
         {
             InitializeComponent();
             _accountService = new AccountService();
+            this.role = role;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Load staff data into the DataGrid
             LoadStaffData();
+            if (!role.Equals("Admin"))
+            {
+                addBtn.IsEnabled = false;
+                editBtn.IsEnabled = false;
+                deleteBtn.IsEnabled = false;
+            }
         }
 
         private void LoadStaffData()
