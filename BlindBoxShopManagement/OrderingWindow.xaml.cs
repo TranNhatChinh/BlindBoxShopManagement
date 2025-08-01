@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +22,14 @@ namespace BlindBoxShopManagement
     /// </summary>
     public partial class OrderingWindow : Window
     {
-        private List<OrderItemViewModel> orderItems = new List<OrderItemViewModel>();
+        private ObservableCollection<OrderItemViewModel> orderItems = new ObservableCollection<OrderItemViewModel>();
 
         public OrderingWindow()
         {
             InitializeComponent();
+
+            orderItems.CollectionChanged += OrderItems_CollectionChanged;
+
         }
 
         private void SaveOrderClick(object sender, RoutedEventArgs e)
@@ -61,7 +66,6 @@ namespace BlindBoxShopManagement
                     }
                 }
 
-                dgvOrderItems.ItemsSource = null;
                 dgvOrderItems.ItemsSource = orderItems;
             }
         }
@@ -69,5 +73,42 @@ namespace BlindBoxShopManagement
         private void RemoveItemClick(object sender, RoutedEventArgs e)
         {
         }
+
+        private void OrderItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (OrderItemViewModel item in e.NewItems)
+                {
+                    item.PropertyChanged += Item_PropertyChanged;
+                }
+            }
+
+            if (e.OldItems != null)
+            {
+                foreach (OrderItemViewModel item in e.OldItems)
+                {
+                    item.PropertyChanged -= Item_PropertyChanged;
+                }
+            }
+
+            UpdateGrandTotal();
+        }
+
+        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(OrderItemViewModel.Quantity) || e.PropertyName == nameof(OrderItemViewModel.TotalPrice))
+            {
+                UpdateGrandTotal();
+            }
+        }
+
+        private void UpdateGrandTotal()
+        {
+            decimal grandTotal = orderItems.Sum(item => item.TotalPrice);
+            lblGrandTotal.Content = grandTotal.ToString("N0") + " đ";
+        }
+
+
     }
 }
