@@ -152,7 +152,7 @@ namespace BlindBoxShopManagement
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            
+
 
             Product a = getInputInventory();
             if (a != null)

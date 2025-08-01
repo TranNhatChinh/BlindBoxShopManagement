@@ -39,6 +39,7 @@ public partial class BlindBoxShopContext : DbContext
         optionsBuilder.UseSqlServer(GetConnectionString());
     }
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
