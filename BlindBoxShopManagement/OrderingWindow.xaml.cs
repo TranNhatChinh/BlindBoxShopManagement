@@ -112,7 +112,7 @@ namespace BlindBoxShopManagement
 
         private void CancelClick(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void AddProductClick(object sender, RoutedEventArgs e)
@@ -142,10 +142,19 @@ namespace BlindBoxShopManagement
                 dgvOrderItems.ItemsSource = orderItems;
             }
         }
-
-        private void RemoveItemClick(object sender, RoutedEventArgs e)
+        private void DeleteItem_Click(object sender, RoutedEventArgs e)
         {
+            if (sender is Button button && button.DataContext is OrderItemViewModel selectedItem)
+            {
+                var result = MessageBox.Show($"Bạn có chắc muốn xóa sản phẩm \"{selectedItem.ProductName}\"ra khỏi đơn hàng ?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    orderItems.Remove(selectedItem);
+                    UpdateGrandTotal(); // Cập nhật lại tổng
+                }
+            }
         }
+
 
         private void OrderItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {

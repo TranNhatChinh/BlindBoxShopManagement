@@ -26,10 +26,19 @@
           Margin="20,40,20,80" 
           IsReadOnly="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding ProductName}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Đơn giá" Binding="{Binding Price}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DataGridTextColumn Header="Thành tiền" Binding="{Binding TotalPrice}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Amount" Binding="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Total money" Binding="{Binding TotalPrice}" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Header="Delete">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Delete" 
+                    Click="DeleteItem_Click"
+                    Padding="4" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
 
