@@ -42,5 +42,14 @@ namespace BAL.Service
         {
             return accountRepository.GetRoleByEmail(email);
         }
+
+        public void AddStaffAccount(Account account, AccountDetail detail)
+        {
+            if (account == null || detail == null)
+            {
+                throw new ArgumentNullException("Account or AccountDetail cannot be null");
+            }
+            accountRepository.AddStaffAccount(account, detail);
+        }
     }
 }

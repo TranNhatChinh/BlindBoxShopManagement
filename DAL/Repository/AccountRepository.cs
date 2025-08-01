@@ -27,7 +27,19 @@ namespace DAL.Repository
                                           .ToList();
         }
 
+        public void AddStaffAccount(Account account, AccountDetail detail)
+        {
+            if (account == null || detail == null)
+            {
+                throw new ArgumentNullException("Account or AccountDetail cannot be null");
+            }
+            _context.Accounts.Add(account);
+            _context.SaveChanges(); // Ensure account ID is generated
 
+            detail.AccountId = account.Id;
+            _context.AccountDetails.Add(detail);
+            _context.SaveChanges();
+        }
 
         public string GetRoleByEmail(string email)
         {

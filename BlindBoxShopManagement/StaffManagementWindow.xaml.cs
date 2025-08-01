@@ -60,7 +60,13 @@ namespace BlindBoxShopManagement
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            
+            var addWindow = new AddStaffWindow();
+            addWindow.Owner = this;
+
+            if (addWindow.ShowDialog() == true)
+            {
+                LoadStaffData();
+            }
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)

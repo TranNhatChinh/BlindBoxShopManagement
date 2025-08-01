@@ -39,8 +39,6 @@ namespace BlindBoxShopManagement
                 staffManagementButton.IsEnabled = false;
                 ProductManagementButton.IsEnabled = false;
             }
-      
-          
         }
 
         private void StaffManageClick(object sender, RoutedEventArgs e)
