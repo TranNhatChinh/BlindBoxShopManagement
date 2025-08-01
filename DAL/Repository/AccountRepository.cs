@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace DAL.Repository
 {
     public class AccountRepository
     {
@@ -19,7 +19,7 @@ namespace DAL
             return _context.Accounts.FirstOrDefault(a => a.Email == email);
         }
 
-        public String GetRoleByEmail(string email)
+        public string GetRoleByEmail(string email)
         {
             var account = _context.Accounts.FirstOrDefault(a => a.Email == email);
             return account?.Role ?? "User"; // Default to "User" if not found

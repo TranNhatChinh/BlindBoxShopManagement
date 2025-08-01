@@ -14,4 +14,6 @@ public partial class Account
     public string? Email { get; set; }
 
     public string Role { get; set; } = null!;
+
+    public virtual AccountDetail? AccountDetail { get; set; }
 }
