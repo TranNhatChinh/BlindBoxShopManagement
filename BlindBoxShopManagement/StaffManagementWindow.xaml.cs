@@ -60,16 +60,28 @@ namespace BlindBoxShopManagement
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            String searchText = txtSearch.Text.Trim();
-            if (searchText.Equals("Search by Full Name") || string.IsNullOrWhiteSpace(searchText))
+            
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = txtSearch.Text.Trim();
+
+            var staffList = _accountService.getAllStaffDetails();
+
+            if (string.IsNullOrWhiteSpace(searchText) || searchText.Equals("Search by Full Name", StringComparison.OrdinalIgnoreCase))
             {
-                //Show all staff
-                MessageBox.Show("Please enter a valid name to search.");
-                return;
+                // Show all staff
+                dgvDisplay.ItemsSource = staffList;
             }
             else
             {
-                // Perform search logic here
+                // Filter by full name (case-insensitive)
+                var filtered = staffList
+                    .Where(s => s.FullName != null && s.FullName.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                dgvDisplay.ItemsSource = filtered;
             }
         }
     }

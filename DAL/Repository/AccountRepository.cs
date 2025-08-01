@@ -27,6 +27,8 @@ namespace DAL.Repository
                                           .ToList();
         }
 
+
+
         public string GetRoleByEmail(string email)
         {
             var account = _context.Accounts.FirstOrDefault(a => a.Email == email);
