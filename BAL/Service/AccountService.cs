@@ -1,4 +1,5 @@
-﻿using DAL.Repository;
+﻿using DAL.Entities;
+using DAL.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,11 @@ namespace BAL.Service
             {
                 return true; // Credentials are valid
             }
+        }
+
+        public List<AccountDetail> getAllStaffDetails()
+        {
+            return accountRepository.getAllStaffDetails();
         }
 
         public string GetRoleByEmail(string email)

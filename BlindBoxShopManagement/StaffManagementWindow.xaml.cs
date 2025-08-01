@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BAL.Service;
+using DAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,23 @@ namespace BlindBoxShopManagement
     /// </summary>
     public partial class StaffManagementWindow : Window
     {
+
+        private AccountService _accountService;
         public StaffManagementWindow()
         {
             InitializeComponent();
+            _accountService = new AccountService();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Load staff data into the DataGrid
+            LoadStaffData();
+        }
+
+        private void LoadStaffData()
+        {
+            dgvDisplay.ItemsSource = _accountService.getAllStaffDetails();
         }
 
         private void txtSearch_GotFocus(object sender, RoutedEventArgs e)

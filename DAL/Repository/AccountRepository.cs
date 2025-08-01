@@ -1,4 +1,5 @@
 ﻿using DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,13 @@ namespace DAL.Repository
         public Account GetAccountByEmail(string email)
         {
             return _context.Accounts.FirstOrDefault(a => a.Email == email);
+        }
+
+        public List<AccountDetail> getAllStaffDetails()
+        {
+            return _context.AccountDetails.Include(ad => ad.Account)
+                                          .Where(ad => ad.Account.Role == "Staff")
+                                          .ToList();
         }
 
         public string GetRoleByEmail(string email)

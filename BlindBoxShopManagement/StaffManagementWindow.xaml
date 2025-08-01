@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlindBoxShopManagement"
         mc:Ignorable="d"
-        Title="Staff Management" Height="500" Width="900" WindowStartupLocation="CenterScreen">
+        Title="Staff Management" Height="500" Width="900" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -33,13 +33,8 @@
                      Foreground="Gray"
                      GotFocus="txtSearch_GotFocus"
                      LostFocus="txtSearch_LostFocus"/>
-            <Button Content="Search" Width="80" Height="30" Margin="0,0,20,0" Click="btnSearch_Click"/>
-
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Add" Width="80" Margin="5,0" Click="btnAdd_Click"/>
-                <Button Content="Edit" Width="80" Margin="5,0" Click="btnEdit_Click"/>
-                <Button Content="Delete" Width="80" Margin="5,0" Click="btnDelete_Click"/>
-                <Button Content="Refresh" Width="80" Margin="5,0" Click="btnRefresh_Click"/>
             </StackPanel>
         </DockPanel>
 
@@ -56,8 +51,8 @@
                 <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="*"/>
                 <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="*"/>
                 <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="*"/>
-                <DataGridTextColumn Header="DOB" Binding="{Binding DOB}" Width="*"/>
-                <DataGridTextColumn Header="ID Number" Binding="{Binding IDNumber}" Width="*"/>
+                <DataGridTextColumn Header="DOB" Binding="{Binding DateOfBirth}" Width="*"/>
+                <DataGridTextColumn Header="ID Number" Binding="{Binding IdentityNumber}" Width="*"/>
                 <DataGridTextColumn Header="Avatar" Binding="{Binding Avatar}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
