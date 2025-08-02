@@ -38,6 +38,11 @@ namespace BlindBoxShopManagement
             {
                 staffManagementButton.IsEnabled = false;
                 ProductManagementButton.IsEnabled = false;
+
+            }
+            if (!role.Equals("Staff") && !role.Equals("Admin") && !role.Equals("Manager"))
+            {
+                OrderCreateButton.IsEnabled = false;
             }
         }
 
@@ -70,7 +75,6 @@ namespace BlindBoxShopManagement
         {
             ProductWindow productWindow = new ProductWindow(role);
             productWindow.Show();
-            this.Close(); // Close the current window
         }
 
         private void SearchClick(object sender, RoutedEventArgs e)
