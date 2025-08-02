@@ -40,6 +40,7 @@
         <Label Content="Find by Date:" HorizontalAlignment="Left" Height="36" Margin="80,103,0,0" VerticalAlignment="Top" Width="182"/>
         <Button Content="Search" Click="SearchByCustomerNameClick" HorizontalAlignment="Left" Height="36" Margin="620,42,0,0" VerticalAlignment="Top" Width="83"/>
         <Button Content="Search" Click="SearchByDateClick" HorizontalAlignment="Left" Height="36" Margin="457,103,0,0" VerticalAlignment="Top" Width="83"/>
+        <Button Content="Export" Click="btnSearch_Click" HorizontalAlignment="Left" Height="36" Margin="620,103,0,0" VerticalAlignment="Top" Width="83"/>
         <DatePicker x:Name="DpPicker" HorizontalAlignment="Left" Height="36" Margin="226,103,0,0" VerticalAlignment="Top" Width="214"/>
 
 
