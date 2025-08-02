@@ -71,8 +71,12 @@ namespace BlindBoxShopManagement.Utils
             var csv = new StringBuilder();
             csv.AppendLine("Order ID,Customer Name,Created At,Total Price");
 
+            decimal total = 0;
+
             foreach (var o in orders)
             {
+                decimal price = o.TotalPrice ?? 0;
+                total += price;
                 csv.AppendLine(string.Join(",", new[]
                 {
                     o.Id.ToString(),
@@ -81,7 +85,7 @@ namespace BlindBoxShopManagement.Utils
                     o.TotalPrice?.ToString("0.00")
                 }));
             }
-
+            csv.AppendLine($",,,{total:0.00}");
             File.WriteAllText(filePath, csv.ToString(), Encoding.UTF8);
         }
 
