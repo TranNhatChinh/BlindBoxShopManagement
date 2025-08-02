@@ -89,5 +89,11 @@ namespace BlindBoxShopManagement
                 dgvDisplay.ItemsSource = results;
             }
         }
+
+        private void OrderHistoryButton(object sender, RoutedEventArgs e)
+        {
+            OrderHistoryWindow orderHistoryWindow = new OrderHistoryWindow();   
+            orderHistoryWindow.Show();  
+        }
     }
 }
