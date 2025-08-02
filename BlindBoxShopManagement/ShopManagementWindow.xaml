@@ -11,7 +11,7 @@
         <Button Content="Staff Management" Name="staffManagementButton" HorizontalAlignment="Left" Height="25" Margin="466,109,0,0" VerticalAlignment="Top" Width="141" Click="StaffManageClick"/>
         <Button Content="Log out" HorizontalAlignment="Left" Height="20" Margin="700,537,0,0" VerticalAlignment="Top" Width="82" Click="LogOutClick"/>
         <Button Content="Product Management" Name="ProductManagementButton" HorizontalAlignment="Left" Height="25" Margin="265,109,0,0" VerticalAlignment="Top" Click="ProductManagementClick" Width="148"/>
-        <Button Content="Create Order" HorizontalAlignment="Left" Height="25" Margin="55,109,0,0" VerticalAlignment="Top" Width="138" Click="Button_Order" RenderTransformOrigin="0.333,0.562"/>
+        <Button x:Name="OrderCreateButton" Content="Create Order" HorizontalAlignment="Left" Height="25" Margin="55,109,0,0" VerticalAlignment="Top" Width="138" Click="Button_Order" RenderTransformOrigin="0.333,0.562"/>
 
 
         <DataGrid Name="dgvDisplay"

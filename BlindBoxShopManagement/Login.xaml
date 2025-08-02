@@ -5,14 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlindBoxShopManagement"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="800" Background="LightPink" WindowStartupLocation="CenterScreen">
+        Title="Login" Height="420" Width="360" Background="WhiteSmoke" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Content="Account: " HorizontalAlignment="Left" Height="25" Margin="202,174,0,0" VerticalAlignment="Top" Width="67"/>
-        <Label Content="Password:" HorizontalAlignment="Left" Height="25" Margin="202,226,0,0" VerticalAlignment="Top" Width="67"/>
-        <TextBox HorizontalAlignment="Center" Height="25" Margin="0,174,0,0" TextWrapping="Wrap" x:Name="accountTxt" VerticalAlignment="Top" Width="208" />
-        <Button Click="Button_Login" Content= "Login" HorizontalAlignment="Left" Height="23" Margin="328,290,0,0" VerticalAlignment="Top" Width="133"/>
-        <Label FontSize="30" HorizontalContentAlignment="Center"  Content="Blind Box Shop Management"  Height="99" Margin="128,49,128,0" VerticalAlignment="Top" Width="544"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Center" Height="25" Margin="0,226,0,0" VerticalAlignment="Top" Width="208"/>
+        <Label Content="Account: " HorizontalAlignment="Left" Height="25" Margin="72,115,0,0" VerticalAlignment="Top" Width="67" RenderTransformOrigin="1.204,-0.492"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Height="25" Margin="72,184,0,0" VerticalAlignment="Top" Width="67"/>
+        <TextBox HorizontalAlignment="Left" Height="25" Margin="72,145,0,0" TextWrapping="Wrap" x:Name="accountTxt" VerticalAlignment="Top" Width="208" />
+        <Button Click="Button_Login" Content= "Login" HorizontalAlignment="Center" Height="23" Margin="0,261,0,0" VerticalAlignment="Top" Width="132"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Height="25" Margin="72,209,0,0" VerticalAlignment="Top" Width="208"/>
 
     </Grid>
 </Window>
