@@ -1,17 +1,9 @@
 ﻿using BAL.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BlindBoxShopManagement.Utils;
+using DAL.Entities;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.IO;
 
 namespace BlindBoxShopManagement
 {
@@ -101,6 +93,47 @@ namespace BlindBoxShopManagement
             // Cập nhật DataGrid với danh sách đơn hàng tìm được
             dgvDisplay.ItemsSource = orders;
         }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgvDisplay.ItemsSource is not List<Order> orderList || orderList.Count == 0)
+            {
+                MessageBox.Show("No data to export.");
+                return;
+            }
+
+            var dialog = new Microsoft.Win32.SaveFileDialog
+            {
+                Filter = "CSV files (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx",
+                FileName = "OrderExport"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                try
+                {
+                    string extension = Path.GetExtension(dialog.FileName);
+                    string datedPath = Path.Combine(
+                        Path.GetDirectoryName(dialog.FileName)!,
+                        $"{Path.GetFileNameWithoutExtension(dialog.FileName)}_{DateTime.Now:yyyyMMdd}{extension}"
+                    );
+                    if (dialog.FilterIndex == 1)
+                    {
+                        ExportUtils.ExportOrdersToCsv(datedPath, orderList);
+                    }
+                    else
+                    {
+                        ExportUtils.ExportOrdersToExcel(datedPath, orderList);
+                    }
+
+                    MessageBox.Show("Export successful!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Export failed: {ex.Message}");
+                }
+            }
+        }
     }
-    }
+}
 
