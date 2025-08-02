@@ -24,6 +24,35 @@ namespace BAL.Service
         {
             return productRepository.findByProductName(productName);
         }
-
+        public List<Product> GetAllProducts()
+        {
+            return productRepository.GetAllProduct();
+        }
+        public List<Product> GetAllProductsByProductName(string supplier)
+        {
+            return productRepository.GetAllProductsByProductName(supplier);
+        }
+        public bool IsExistedId(int id)
+        {
+            return productRepository.isExistedId(id);
+        }
+        public void DeleteProduct(int id)
+        {
+            productRepository.DeleteProduct(id);
+        }
+        public void AddProduct(Product product)
+        {
+            if (product != null)
+            {
+                productRepository.AddProduct(product);
+            }
+        }
+        public void UpdateProduct(Product product)
+        {
+            if (product != null)
+            {
+                productRepository.UpdateProduct(product);
+            }
+        }
     }
 }

@@ -24,6 +24,43 @@ namespace DAL.Repository
         {
             return _context.Products.Where(p => p.Name.Contains(productName)).ToList();
         }
+        public List<Product> GetAllProduct()
+        {
+            return _context.Products.ToList();
+        }
 
+        public List<Product> GetAllProductsByProductName(string name)
+        {
+            return _context.Products.Where(x => x.Name.Contains(name)).ToList();
+        }
+        public bool isExistedId(int id)
+        {
+            return _context.Products.Any(x => x.Id == id);
+        }
+        public void DeleteProduct(int id)
+        {
+            var inventory = _context.Products.Find(id);
+            if (inventory != null)
+            {
+                _context.Products.Remove(inventory);
+                _context.SaveChanges();
+            }
+        }
+        public void AddProduct(Product inventory)
+        {
+            if (inventory != null)
+            {
+                _context.Products.Add(inventory);
+                _context.SaveChanges();
+            }
+        }
+        public void UpdateProduct(Product inventory)
+        {
+            if (inventory != null)
+            {
+                _context.Products.Update(inventory);
+                _context.SaveChanges();
+            }
+        }
     }
 }
