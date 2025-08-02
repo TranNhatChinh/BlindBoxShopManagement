@@ -16,7 +16,20 @@ namespace DAL.Repository
             _context = new BlindBoxShopContext();
         }
 
- 
+        public List<Order> GetAllOrders()
+        {
+            return _context.Orders.ToList();
+        }   
+
+        public List<Order> GetOrdersByCustomerName(string customerName)
+        {
+            return _context.Orders.Where(o => o.CustomerName.Contains(customerName)).ToList();
+        }
+
+        public List<Order> GetOrdersByDate(DateTime date)
+        {
+            return _context.Orders.Where(o => o.CreatedAt.HasValue && o.CreatedAt.Value.Date == date.Date).ToList();
+        }
 
         public void AddOrder(Order order)
         {

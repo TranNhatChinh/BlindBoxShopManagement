@@ -17,6 +17,16 @@ namespace BAL.Service
             orderRepository = new OrderRepository();
         }
 
+        public List<Order> GetAllOrders()
+        {
+            return orderRepository.GetAllOrders();
+        }
+
+        public List<Order> GetOrdersByCustomerName(string customerName)
+        {
+            return orderRepository.GetOrdersByCustomerName(customerName);
+        }
+
         public bool AddOrder(Order order)
         {
             try
@@ -42,7 +52,12 @@ namespace BAL.Service
             return orderRepository.GetInsufficientStockProducts(orderItems);
         }
 
+        public List<Order> GetOrdersByDate(DateTime date)
+        {
+            return orderRepository.GetOrdersByDate(date);
 
 
+
+        }
     }
 }

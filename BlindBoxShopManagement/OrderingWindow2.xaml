@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:BlindBoxShopManagement"
         mc:Ignorable="d"
         Title="OrderingWindow2" Height="450" Width="800"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <DataGrid Name="dgvDisplay"
                   Grid.Column="0"
